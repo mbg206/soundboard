@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Soundboard</title>
+<style>
+body {
+  font-family: Arial;
+  background-color: gray;
+  text-align: center;
+  color: white;
+}
+h1 {font-size: 64px;}
+#soundButton {
+  font-size: 24px;
+  border-radius: 8px;
+  background-color: #4CAF50;
+  border: none;
+  height: 128px;
+  max-height: 128px;
+  width: 128px;
+  color: white;
+  cursor: pointer;
+}
+#bottomBar {
+  background-color: black;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  text-align: left;
+  padding: 16px;
+}
+</style>
+</head>
+<body onload="loadSounds()">
+<h1>Soundboard</h1>
+<div id="bottomBar">
+<label for="speed">Playback Speed:</label>
+<input type="range" id="speed" name="speed" min="0.1" max="3" step="0.1" value="1">
+<label for="pitch">Change pitch with speed:</label>
+<input type="checkbox" id="pitch" name="pitch" checked="true">
+<button onclick="resetValues()">Reset</button>
+<button onclick="stopSounds()">Stop All Sounds</button>
+</div>
+<script>
+var sounds = [];
+var soundList = [
+{"name": "Taco Bell", "url": "taco-bell.mp3"},
+{"name": "Taco Bell Earrape", "url": "taco-bell-earrape.mp3"},
+{"name": "Vine Boom", "url": "vine-boom.mp3"},
+{"name": "EAS Earrape", "url": "eas-earrape.mp3"},
+{"name": "Lamar Roast", "url": "lamar-roast.mp3"},
+{"name": ".....", "url": "dot-dot-dot.mp3"},
+{"name": "EEEEE", "url": "eeeee.mp3"},
+{"name": "Meow", "url": "meow.mp3"},
+{"name": "Bark", "url": "bark.mp3"},
+{"name": "Boop Bing Bop", "url": "boop-bing-bop.mp3"},
+{"name": "Car Horn", "url": "car-horn.mp3"},
+{"name": "Ringtone", "url": "ringtone.mp3"},
+{"name": "Doorbell", "url": "doorbell.mp3"}
+]
+function loadSounds() {
+  for (var i = 0; i < soundList.length; i++) {
+    var button = document.createElement("button");
+    button.id = "soundButton";
+    button.innerHTML = soundList[i].name;
+    button.setAttribute("onclick", "playAudio('" + soundList[i].url + "');");
+    document.body.appendChild(button);
+  }
+}
+function playAudio(url) {
+  var audioObj = new Audio(url);
+  audioObj.playbackRate = document.getElementById("speed").value;
+  audioObj.preservesPitch = document.getElementById("pitch").checked;
+  audioObj.play();
+  sounds.push(audioObj);
+}
+function resetValues() {
+  document.getElementById("speed").value = 1;
+  document.getElementById("pitch").checked = true;
+}
+function stopSounds() {for (var i = 0; i < sounds.length; i++) {sounds[i].pause();}}
+</script>
+</body>
+</html>
