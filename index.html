@@ -26,10 +26,12 @@ h1 {font-size: 64px;}
   position: fixed;
   bottom: 0;
   left: 0;
+  vertical-align: middle;
   width: 100vw;
   text-align: left;
   padding: 16px;
 }
+audio {height: 24px;}
 </style>
 </head>
 <body onload="loadSounds()">
@@ -41,6 +43,12 @@ h1 {font-size: 64px;}
 <input type="checkbox" id="pitch" name="pitch" checked="true">
 <button onclick="resetValues()">Reset</button>
 <button onclick="stopSounds()">Stop All Sounds</button>
+<label for="mode">Sound mode:</label>
+<select name="mode" id="mode">
+  <option value="background">Background Audio</option>
+  <option value="element">Audio Element</option>
+</select>
+<audio controls id="audioElement"></audio>
 </div>
 <script>
 var sounds = [];
@@ -52,6 +60,13 @@ var soundList = [
 {"name": "Lamar Roast", "url": "lamar-roast.mp3"},
 {"name": ".....", "url": "dot-dot-dot.mp3"},
 {"name": "EEEEE", "url": "eeeee.mp3"},
+{"name": "Among Us Drip", "url": "among-us-drip.mp3"},
+{"name": "music", "url": "burning-up-earrape.mp3"},
+{"name": "Microwave Earrape", "url": "microwave-earrape.mp3"},
+{"name": "USSR Anthem", "url": "ussr-anthem.mp3"},
+{"name": "Windows XP Startup Sound", "url": "windows-xp-startup.mp3"},
+{"name": "Windows XP Startup Earrape", "url": "windows-xp-startup-earrape.mp3"},
+{"name": "Windows 98 Startup Earrape", "url": "windows-98-startup-earrape.mp3"},
 {"name": "Meow", "url": "meow.mp3"},
 {"name": "Bark", "url": "bark.mp3"},
 {"name": "Boop Bing Bop", "url": "boop-bing-bop.mp3"},
@@ -69,17 +84,30 @@ function loadSounds() {
   }
 }
 function playAudio(url) {
-  var audioObj = new Audio(url);
-  audioObj.playbackRate = document.getElementById("speed").value;
-  audioObj.preservesPitch = document.getElementById("pitch").checked;
-  audioObj.play();
-  sounds.push(audioObj);
+  if(document.getElementById("mode").value == "background") {
+    var audioObj = new Audio(url);
+    audioObj.playbackRate = document.getElementById("speed").value;
+    audioObj.preservesPitch = document.getElementById("pitch").checked;
+    audioObj.play();
+    sounds.push(audioObj);
+  }
+  else {
+    var audioObj = document.getElementById("audioElement");
+    audioObj.src = url;
+    audioObj.playbackRate = document.getElementById("speed").value;
+    audioObj.currentTime = 0;
+    audioObj.play();
+  }
 }
 function resetValues() {
   document.getElementById("speed").value = 1;
   document.getElementById("pitch").checked = true;
 }
-function stopSounds() {for (var i = 0; i < sounds.length; i++) {sounds[i].pause();}}
+function stopSounds() {
+  for (var i = 0; i < sounds.length; i++) {sounds[i].pause();}
+  document.getElementById("audioElement").pause;
+  sounds = [];
+}
 </script>
 </body>
 </html>
