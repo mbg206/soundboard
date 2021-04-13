@@ -8,6 +8,7 @@ body {
   background-color: gray;
   text-align: center;
   color: white;
+  height: 2048px;
 }
 h1 {font-size: 64px;}
 #soundButton {
@@ -36,6 +37,7 @@ audio {height: 24px;}
 </head>
 <body onload="loadSounds()">
 <h1>Soundboard</h1>
+<button id="soundButton" onclick="speakTts()">TTS</button><br>
 <div id="bottomBar">
 <label for="speed">Playback Speed:</label>
 <input type="range" id="speed" name="speed" min="0.1" max="3" step="0.1" value="1">
@@ -67,6 +69,14 @@ var soundList = [
 {"name": "Windows XP Startup Sound", "url": "windows-xp-startup.mp3"},
 {"name": "Windows XP Startup Earrape", "url": "windows-xp-startup-earrape.mp3"},
 {"name": "Windows 98 Startup Earrape", "url": "windows-98-startup-earrape.mp3"},
+{"name": "EBS Test", "url": "ebs-test.mp3"},
+{"name": "White noise", "url": "noise.mp3"},
+{"name": "Fortnite knocked sound earrape", "url": "fortnite-knocked-earrape.mp3"},
+{"name": "Nokia Ringtone earrape", "url": "nokia-ringtone-earrape.mp3"},
+{"name": "Wii Sports theme earrape", "url": "wii-sports-theme-earrape.mp3"},
+{"name": "Nokia ringtone arabic", "url": "arabic-nokia-ringtone.mp3"},
+{"name": "Turtle song persian language", "url": "turtle-song-persian-language.mp3"},
+{"name": "Stop it, get some help", "url": "stop-it-get-some-help.mp3"},
 {"name": "Meow", "url": "meow.mp3"},
 {"name": "Bark", "url": "bark.mp3"},
 {"name": "Boop Bing Bop", "url": "boop-bing-bop.mp3"},
@@ -98,6 +108,12 @@ function playAudio(url) {
     audioObj.currentTime = 0;
     audioObj.play();
   }
+}
+function speakTts() {
+  var tts = new SpeechSynthesisUtterance();
+  var ttsText = prompt("Enter text:");
+  tts.text = ttsText;
+  window.speechSynthesis.speak(tts);
 }
 function resetValues() {
   document.getElementById("speed").value = 1;
