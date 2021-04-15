@@ -11,17 +11,20 @@ body {
   height: 2048px;
 }
 h1 {font-size: 64px;}
-#soundButton {
+.soundButton {
   font-size: 24px;
   vertical-align: middle;
   border-radius: 8px;
-  background-color: #4CAF50;
   border: none;
   height: 128px;
   width: 128px;
   color: white;
   cursor: pointer;
 }
+.sound-effects {background-color: #4CAF50;}
+.music {background-color: #DC1C13;}
+.scratch {background-color: #FF9933;}
+.clownfish {background-color: #EFFD5F;}
 #bottomBar {
   background-color: black;
   position: fixed;
@@ -37,7 +40,7 @@ audio {height: 24px;}
 </head>
 <body onload="loadSounds()">
 <h1>Soundboard</h1>
-<button id="soundButton" onclick="speakTts()">TTS</button><br>
+<button class="soundButton sound-effects" onclick="speakTts()">TTS</button><br>
 <div id="bottomBar">
 <label for="speed">Playback Speed:</label>
 <input type="range" id="speed" name="speed" min="0.1" max="3" step="0.1" value="1">
@@ -55,41 +58,61 @@ audio {height: 24px;}
 <script>
 var sounds = [];
 var soundList = [
-{"name": "Taco Bell", "url": "taco-bell.mp3"},
-{"name": "Taco Bell Earrape", "url": "taco-bell-earrape.mp3"},
-{"name": "Vine Boom", "url": "vine-boom.mp3"},
-{"name": "EAS Earrape", "url": "eas-earrape.mp3"},
-{"name": "Lamar Roast", "url": "lamar-roast.mp3"},
-{"name": ".....", "url": "dot-dot-dot.mp3"},
-{"name": "EEEEE", "url": "eeeee.mp3"},
-{"name": "Among Us Drip", "url": "among-us-drip.mp3"},
-{"name": "music", "url": "burning-up-earrape.mp3"},
-{"name": "Microwave Earrape", "url": "microwave-earrape.mp3"},
-{"name": "USSR Anthem", "url": "ussr-anthem.mp3"},
-{"name": "Windows XP Startup Sound", "url": "windows-xp-startup.mp3"},
-{"name": "Windows XP Startup Earrape", "url": "windows-xp-startup-earrape.mp3"},
-{"name": "Windows 98 Startup Earrape", "url": "windows-98-startup-earrape.mp3"},
-{"name": "EBS Test", "url": "ebs-test.mp3"},
-{"name": "White noise", "url": "noise.mp3"},
-{"name": "Fortnite knocked sound earrape", "url": "fortnite-knocked-earrape.mp3"},
-{"name": "Nokia Ringtone earrape", "url": "nokia-ringtone-earrape.mp3"},
-{"name": "Wii Sports theme earrape", "url": "wii-sports-theme-earrape.mp3"},
-{"name": "Nokia ringtone arabic", "url": "arabic-nokia-ringtone.mp3"},
-{"name": "Turtle song persian language", "url": "turtle-song-persian-language.mp3"},
-{"name": "Stop it, get some help", "url": "stop-it-get-some-help.mp3"},
-{"name": "Meow", "url": "meow.mp3"},
-{"name": "Bark", "url": "bark.mp3"},
-{"name": "Boop Bing Bop", "url": "boop-bing-bop.mp3"},
-{"name": "Car Horn", "url": "car-horn.mp3"},
-{"name": "Ringtone", "url": "ringtone.mp3"},
-{"name": "Doorbell", "url": "doorbell.mp3"}
+{"type": "sound-effects", "name": "Taco Bell", "url": "taco-bell.mp3"},
+{"type": "sound-effects", "name": "Taco Bell Earrape", "url": "taco-bell-earrape.mp3"},
+{"type": "sound-effects", "name": "Lamar Roast", "url": "lamar-roast.mp3"},
+{"type": "sound-effects", "name": ".....", "url": "dot-dot-dot.mp3"},
+{"type": "sound-effects", "name": "Vine Boom", "url": "vine-boom.mp3"},
+{"type": "sound-effects", "name": "EAS Earrape", "url": "eas-earrape.mp3"},
+{"type": "sound-effects", "name": "eeeee", "url": "eeeee.mp3"},
+{"type": "sound-effects", "name": "Microwave Earrape", "url": "microwave-earrape.mp3"},
+{"type": "sound-effects", "name": "Windows XP Startup Sound", "url": "windows-xp-startup.mp3"},
+{"type": "sound-effects", "name": "Windows XP Startup Earrape", "url": "windows-xp-startup-earrape.mp3"},
+{"type": "sound-effects", "name": "Windows 98 Startup Earrape", "url": "windows-98-startup-earrape.mp3"},
+{"type": "sound-effects", "name": "EBS Test", "url": "ebs-test.mp3"},
+{"type": "sound-effects", "name": "White Noise", "url": "noise.mp3"},
+{"type": "sound-effects", "name": "Fortnite Knocked Sound Earrape", "url": "fortnite-knocked-earrape.mp3"},
+{"type": "sound-effects", "name": "Stop It Get Some Help", "url": "stop-it-get-some-help.mp3"},
+{"type": "music", "name": "Among Us Drip", "url": "among-us-drip.mp3"},
+{"type": "music", "name": "USSR Anthem", "url": "ussr-anthem.mp3"},
+{"type": "music", "name": "music", "url": "burning-up-earrape.mp3"},
+{"type": "music", "name": "Nokia Ringtone Earrape", "url": "nokia-ringtone-earrape.mp3"},
+{"type": "music", "name": "WII Sports Theme Earrape", "url": "wii-sports-theme-earrape.mp3"},
+{"type": "music", "name": "Arabic Nokia Ringtone", "url": "arabic-nokia-ringtone.mp3"},
+{"type": "music", "name": "Turtle Song Persian Language", "url": "turtle-song-persian-language.mp3"},
+{"type": "music", "name": "Chug Jug With You Earrape", "url": "chug-jug-with-you-earrape.mp3"},
+{"type": "music", "name": "Fortnite Anthem", "url": "fortnite-anthem.mp3"},
+{"type": "music", "name": "Idk", "url": "idk.mp3"},
+{"type": "scratch", "name": "Meow", "url": "meow.mp3"},
+{"type": "scratch", "name": "Bark", "url": "bark.mp3"},
+{"type": "scratch", "name": "Car Horn", "url": "car-horn.mp3"},
+{"type": "scratch", "name": "Doorbell", "url": "doorbell.mp3"},
+{"type": "scratch", "name": "Boop Bing Bop", "url": "boop-bing-bop.mp3"},
+{"type": "scratch", "name": "Ringtone", "url": "ringtone.mp3"},
+{"type": "clownfish", "name": "Applause", "url": "applause.mp3"},
+{"type": "clownfish", "name": "Fanfare", "url": "fanfare.mp3"},
+{"type": "clownfish", "name": "Bicycle Bell", "url": "bicycle-bell.mp3"},
+{"type": "clownfish", "name": "Boooooo", "url": "boooooo.mp3"},
+{"type": "clownfish", "name": "Gunshot", "url": "gunshot.mp3"},
+{"type": "clownfish", "name": "Cheering", "url": "cheering.mp3"},
+{"type": "clownfish", "name": "I Feel Good", "url": "i-feel-good.mp3"},
+{"type": "clownfish", "name": "Gong", "url": "gong.mp3"},
+{"type": "clownfish", "name": "Hail To The King", "url": "hail-to-the-king.mp3"},
+{"type": "clownfish", "name": "Laugh", "url": "laugh.mp3"},
+{"type": "clownfish", "name": "Ricochet", "url": "ricochet.mp3"},
+{"type": "clownfish", "name": "Sheep", "url": "sheep.mp3"},
+{"type": "clownfish", "name": "You Guys Suck", "url": "you-guys-suck.mp3"},
+{"type": "clownfish", "name": "You Suck", "url": "you-suck.mp3"},
+{"type": "clownfish", "name": "Duck", "url": "duck.mp3"},
+{"type": "clownfish", "name": "Smoke Weed Everyday", "url": "smoke-weed-everyday.mp3"}
 ]
 function loadSounds() {
   for (var i = 0; i < soundList.length; i++) {
     var button = document.createElement("button");
-    button.id = "soundButton";
+    button.classList.add("soundButton");
+    button.classList.add(soundList[i].type);
     button.innerHTML = soundList[i].name;
-    button.setAttribute("onclick", "playAudio('" + soundList[i].url + "');");
+    button.setAttribute("onclick", "playAudio('" + soundList[i].type + "/" + soundList[i].url + "');");
     document.body.appendChild(button);
   }
 }
