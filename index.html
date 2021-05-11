@@ -8,7 +8,7 @@ body {
   background-color: gray;
   text-align: center;
   color: white;
-  height: 2048px;
+  height: 4096px;
 }
 h1 {font-size: 64px;}
 .soundButton {
@@ -25,6 +25,7 @@ h1 {font-size: 64px;}
 .music {background-color: #DC1C13;}
 .scratch {background-color: #FF9933;}
 .clownfish {background-color: #EFFD5F;}
+.secret {background-color: #800080;}
 #bottomBar {
   background-color: black;
   position: fixed;
@@ -71,6 +72,7 @@ var soundList = [
 {"type": "sound-effects", "name": "Windows 98 Startup Earrape", "url": "windows-98-startup-earrape.mp3"},
 {"type": "sound-effects", "name": "EBS Test", "url": "ebs-test.mp3"},
 {"type": "sound-effects", "name": "White Noise", "url": "noise.mp3"},
+{"type": "sound-effects", "name": "Secret", "url": "secret"},
 {"type": "sound-effects", "name": "Fortnite Knocked Sound Earrape", "url": "fortnite-knocked-earrape.mp3"},
 {"type": "sound-effects", "name": "Stop It Get Some Help", "url": "stop-it-get-some-help.mp3"},
 {"type": "sound-effects", "name": "Get Wifi Anywhere You Go", "url": "get-wifi-anywhere-you-go.mp3"},
@@ -82,12 +84,21 @@ var soundList = [
 {"type": "sound-effects", "name": "Siren", "url": "siren.mp3"},
 {"type": "sound-effects", "name": "Phone Buzz", "url": "phone-buzz.mp3"},
 {"type": "sound-effects", "name": "Messenger Message Sound", "url": "messenger-message-sound.mp3"},
+{"type": "sound-effects", "name": "Nokia Ringtone Earrape", "url": "nokia-ringtone-earrape.mp3"},
+{"type": "sound-effects", "name": "Arabic Nokia Ringtone", "url": "arabic-nokia-ringtone.mp3"},
+{"type": "sound-effects", "name": "Not Funny Didn't Laugh", "url": "not-funny-didnt-laugh.mp3"},
+{"type": "sound-effects", "name": "Tactical Nuke Incoming", "url": "tactical-nuke-incoming.mp3"},
+{"type": "sound-effects", "name": "Patrick Convertible", "url": "patrick-convertible.mp3"},
+{"type": "sound-effects", "name": "Jaiden", "url": "recording2.mp3"},
+{"type": "sound-effects", "name": "FORTNITE PLAY NOW", "url": "fortnight.mp3"},
+{"type": "sound-effects", "name": "Cracker And Honky", "url": "cracker-honky.mp3"},
+{"type": "sound-effects", "name": "moan", "url": "yes.mp3"},
+{"type": "sound-effects", "name": "B u s", "url": "bus.mp3"},
+{"type": "sound-effects", "name": "George", "url": "george.mp3"},
 {"type": "music", "name": "Among Us Drip", "url": "among-us-drip.mp3"},
 {"type": "music", "name": "USSR Anthem", "url": "ussr-anthem.mp3"},
 {"type": "music", "name": "music", "url": "burning-up-earrape.mp3"},
-{"type": "music", "name": "Nokia Ringtone Earrape", "url": "nokia-ringtone-earrape.mp3"},
 {"type": "music", "name": "WII Sports Theme Earrape", "url": "wii-sports-theme-earrape.mp3"},
-{"type": "music", "name": "Arabic Nokia Ringtone", "url": "arabic-nokia-ringtone.mp3"},
 {"type": "music", "name": "Turtle Song Persian Language", "url": "turtle-song-persian-language.mp3"},
 {"type": "music", "name": "Chug Jug With You Earrape", "url": "chug-jug-with-you-earrape.mp3"},
 {"type": "music", "name": "Fortnite Anthem", "url": "fortnite-anthem.mp3"},
@@ -96,6 +107,12 @@ var soundList = [
 {"type": "music", "name": "Mine Diamonds", "url": "mine-diamonds.mp3"},
 {"type": "music", "name": "Subway Sexist", "url": "subway-sexist.mp3"},
 {"type": "music", "name": "Candyland Low Quality", "url": "candyland-low-quality.mp3"},
+{"type": "music", "name": "Love Me Long Time", "url": "love-me-long-time.mp3"},
+{"type": "music", "name": "Gong Ging Ging Gang Trap Earrape", "url": "gong-ging-ging-gang-trap-earrape.mp3"},
+{"type": "music", "name": "PPAP Earrape", "url": "ppap.mp3"},
+{"type": "music", "name": "Spongebob Earrape", "url": "spongebob.mp3"},
+{"type": "music", "name": "The Cuss Word Song Earrape", "url": "the-cuss-word-song.mp3"},
+{"type": "music", "name": "Ram Ranch Earrape", "url": "ram-ranch.mp3"},
 {"type": "scratch", "name": "Meow", "url": "meow.mp3"},
 {"type": "scratch", "name": "Bark", "url": "bark.mp3"},
 {"type": "scratch", "name": "Car Horn", "url": "car-horn.mp3"},
@@ -119,6 +136,13 @@ var soundList = [
 {"type": "clownfish", "name": "Duck", "url": "duck.mp3"},
 {"type": "clownfish", "name": "Smoke Weed Everyday", "url": "smoke-weed-everyday.mp3"}
 ]
+var secrets = [
+{"type": "secret", "name": "cum", "url": "cum.mp3"},
+{"type": "secret", "name": "exclusive", "url": "exclusive.mp3"},
+{"type": "secret", "name": "sis", "url": "sis.mp3"},
+{"type": "secret", "name": "princess", "url": "princess.mp3"},
+{"type": "secret", "name": "nubiles", "url": "nubiles.mp3"}
+]
 function loadSounds() {
   for (var i = 0; i < soundList.length; i++) {
     var button = document.createElement("button");
@@ -130,19 +154,31 @@ function loadSounds() {
   }
 }
 function playAudio(url) {
-  if(document.getElementById("mode").value == "background") {
-    var audioObj = new Audio(url);
-    audioObj.playbackRate = document.getElementById("speed").value;
-    audioObj.preservesPitch = document.getElementById("pitch").checked;
-    audioObj.play();
-    sounds.push(audioObj);
+  if (url == "sound-effects/secret") {
+    for (var i = 0; i < secrets.length; i++) {
+      var button = document.createElement("button");
+      button.classList.add("soundButton");
+      button.classList.add(secrets[i].type);
+      button.innerHTML = secrets[i].name;
+      button.setAttribute("onclick", "playAudio('" + secrets[i].type + "/" + secrets[i].url + "');");
+      document.body.appendChild(button);
+    }
   }
   else {
-    var audioObj = document.getElementById("audioElement");
-    audioObj.src = url;
-    audioObj.playbackRate = document.getElementById("speed").value;
-    audioObj.currentTime = 0;
-    audioObj.play();
+    if(document.getElementById("mode").value == "background") {
+      var audioObj = new Audio(url);
+      audioObj.playbackRate = document.getElementById("speed").value;
+      audioObj.preservesPitch = document.getElementById("pitch").checked;
+      audioObj.play();
+      sounds.push(audioObj);
+    }
+    else {
+      var audioObj = document.getElementById("audioElement");
+      audioObj.src = url;
+      audioObj.playbackRate = document.getElementById("speed").value;
+      audioObj.currentTime = 0;
+      audioObj.play();
+    }
   }
 }
 function speakTts() {
