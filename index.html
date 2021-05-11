@@ -143,6 +143,7 @@ var secrets = [
 {"type": "secret", "name": "princess", "url": "princess.mp3"},
 {"type": "secret", "name": "nubiles", "url": "nubiles.mp3"}
 ]
+var secretOn = true;
 function loadSounds() {
   for (var i = 0; i < soundList.length; i++) {
     var button = document.createElement("button");
@@ -155,13 +156,16 @@ function loadSounds() {
 }
 function playAudio(url) {
   if (url == "sound-effects/secret") {
-    for (var i = 0; i < secrets.length; i++) {
-      var button = document.createElement("button");
-      button.classList.add("soundButton");
-      button.classList.add(secrets[i].type);
-      button.innerHTML = secrets[i].name;
-      button.setAttribute("onclick", "playAudio('" + secrets[i].type + "/" + secrets[i].url + "');");
-      document.body.appendChild(button);
+    if (secretOn) {
+      for (var i = 0; i < secrets.length; i++) {
+        var button = document.createElement("button");
+        button.classList.add("soundButton");
+        button.classList.add(secrets[i].type);
+        button.innerHTML = secrets[i].name;
+        button.setAttribute("onclick", "playAudio('" + secrets[i].type + "/" + secrets[i].url + "');");
+        document.body.appendChild(button);
+      }
+      secretOn = false;
     }
   }
   else {
